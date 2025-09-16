@@ -1,13 +1,14 @@
 import torch
-from torchvision import models, transforms, datasets
+from torchvision import models, transforms
 from PIL import Image
 from flask import Flask, request, jsonify
 import io
 
-train_dataset = datasets.ImageFolder("datasets/diseased_plants/train")
-labels = train_dataset.classes
+labels =  ['Cassava Bacterial Blight', 'Cassava Healthy', 'Cassava Mosaic Disease', 'Corn Cercospora Leaf Spot', 'Corn Common Rust', 'Corn Healthy', 'Corn Northern Leaf Blight', 'Mango Anthracnose', 'Mango Gall Midge', 'Mango Healthy', 'Mango Powdery Mildew', 'Orange Citrus Greening', 'Pepper Bacterial Spot', 'Pepper Healthy', 'Potato Early Blight', 'Potato Healthy', 'Potato Late Blight', 'Rice BrownSpot', 'Rice Healthy', 'Tomato Bacterial Spot', 'Tomato Early Blight', 'Tomato Healthy', 'Tomato Late Blight', 'Tomato Yellow Leaf Curl Virus']
 
 no_of_classes = len(labels)
+
+print("labels: ",labels)
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),

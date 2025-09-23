@@ -2,6 +2,7 @@ import torch
 from torchvision import models, transforms
 from PIL import Image
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import io
 
 labels =  ['Cassava Bacterial Blight', 'Cassava Healthy', 'Cassava Mosaic Disease', 'Corn Cercospora Leaf Spot', 'Corn Common Rust', 'Corn Healthy', 'Corn Northern Leaf Blight', 'Mango Anthracnose', 'Mango Gall Midge', 'Mango Healthy', 'Mango Powdery Mildew', 'Orange Citrus Greening', 'Pepper Bacterial Spot', 'Pepper Healthy', 'Potato Early Blight', 'Potato Healthy', 'Potato Late Blight', 'Rice BrownSpot', 'Rice Healthy', 'Tomato Bacterial Spot', 'Tomato Early Blight', 'Tomato Healthy', 'Tomato Late Blight', 'Tomato Yellow Leaf Curl Virus']
@@ -22,6 +23,7 @@ model.eval()
 print("Model loaded!")
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -48,4 +50,4 @@ def predict():
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=port)
